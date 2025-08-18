@@ -1,24 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/18 22:29:35 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/19 01:15:43 by abendrih         ###   ########.fr       */
+/*   Created: 2025/08/19 01:13:19 by abendrih          #+#    #+#             */
+/*   Updated: 2025/08/19 01:14:31 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-
-# include "../libft/libft.h"
-
-typedef struct s_point_node
-{
-	int	x;
-	int	y;
-}		t_point_node;
-
-#endif
+#include "../include/fdf.h"
