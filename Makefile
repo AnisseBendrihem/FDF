@@ -6,39 +6,46 @@
 #    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/18 22:29:32 by abendrih          #+#    #+#              #
-#    Updated: 2025/08/19 01:26:17 by abendrih         ###   ########.fr        #
+#    Updated: 2025/08/19 02:07:22 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = fdf
+
 # ┌─────────────────────────────┐
-# │         REPERTOIRES          │
+# │         REPERTOIRES         │
 # └─────────────────────────────┘
 SRC_DIR     = src
 PARSING_DIR = parsing
 INCLUDE_DIR = include
 LIBFT_DIR   = libft
+MLX_DIR     = minilibx-linux
 
 LIBFT_LIB   = $(LIBFT_DIR)/libft.a
+MLX_LIB     = $(MLX_DIR)/libmlx.a
 
 # ┌─────────────────────────────┐
-# │           SOURCES            │
+# │           SOURCES           │
 # └─────────────────────────────┘
 SRC         = \
 	$(SRC_DIR)/main.c \
 	$(SRC_DIR)/fdf.c \
-	$(PARSING_DIR)/parsing.c \
+	$(PARSING_DIR)/parsing.c
 
 OBJ         = $(SRC:.c=.o)
 
 # ┌─────────────────────────────┐
-# │         COMPILATION          │
+# │         COMPILATION         │
 # └─────────────────────────────┘
 CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror -g3
 
+# Linux link flags for MiniLibX
+MLX_LDFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_CFLAGS  = -I$(MLX_DIR)
+
 # ┌─────────────────────────────┐
-# │          COULEURS            │
+# │           COULEURS          │
 # └─────────────────────────────┘
 RESET       = \033[0m
 GREEN       = \033[0;32m
@@ -50,11 +57,11 @@ MATRIX_GREEN= \033[38;5;46m
 
 MATRIX_CODE = "\n\
 $(MATRIX_GREEN)\
-> Initializing stack sequences...\n\
+> Initializing wireframe engine...\n\
 > Injecting LIBFT Core [OK]\n\
-> Algorithmic brain connected.\n\
+> MiniLibX linked [OK]\n\
 > Binary path secured: $(NAME)\n\
-> Ready for sorting reality.\n\
+> Ready for rendering.\n\
 > [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%\n\
 > SYSTEM READY.\n\
 $(RESET)"
@@ -64,27 +71,29 @@ MATRIX_CLEAN = "\n\
 \033[38;5;93m║ \033[38;5;51mPurging temporals...\033[0m               \033[38;5;93m║\n\
 \033[38;5;93m║ \033[38;5;51m[▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] \033[38;5;198m100%%\033[0m         \033[38;5;93m║\n\
 \033[38;5;93m║ \033[38;5;201mAll objects neutralized\033[0m            \033[38;5;93m║\n\
-\033[38;5;93m║ \033[38;5;51mFDF Reactor Offline\033[0m                \033[38;5;93m║\n\
+\033[38;5;93m║ \033[38;5;51mFDF Renderer Offline\033[0m               \033[38;5;93m║\n\
 \033[38;5;93m╚════════════════════════════════════╝\n\
 $(RESET)"
 
 # ┌─────────────────────────────┐
-# │          COMMANDES           │
+# │          COMMANDES          │
 # └─────────────────────────────┘
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory 2>&1 | grep -v '^gcc'
-	@echo "$(GREEN)Linking with LIBFT...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_LIB)
+	@$(MAKE) -C $(MLX_DIR) --no-print-directory 2>&1 | grep -v '^gcc'
+	@echo "$(GREEN)Linking with LIBFT + MiniLibX...$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_LIB) $(MLX_LDFLAGS)
 	@echo $(MATRIX_CODE)
 
 %.o: %.c
 	@echo "$(CYAN)Compiling$(RESET) $<"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -I$(LIBFT_DIR) $(MLX_CFLAGS) -c $< -o $@
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
+	-@$(MAKE) -C $(MLX_DIR) clean --no-print-directory
 	@echo "$(CYAN)Cleaning object files...$(RESET)"
 	@rm -f $(OBJ)
 	@echo $(MATRIX_CLEAN)

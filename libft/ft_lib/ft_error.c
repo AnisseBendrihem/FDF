@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/19 01:19:19 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/19 02:13:28 by abendrih         ###   ########.fr       */
+/*   Created: 2025/08/19 02:01:16 by abendrih          #+#    #+#             */
+/*   Updated: 2025/08/19 02:04:08 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../libft.h"
 
-int	main(int ac, char **av)
+void	ft_error(int fd)
 {
-	if (ac != 2)
-		return (ft_error(2), 0);
-	if (!mother_parsing(ac, av))
-		fdf();
+	write(fd, "error", 5);
 }

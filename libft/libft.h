@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:32:44 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/19 01:12:00 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/19 02:02:57 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void					ft_putchar_fd(char c, int fd);
 void					ft_putstr_fd(char *s, int fd);
 void					ft_putendl_fd(char *s, int fd);
 void					ft_putnbr_fd(int n, int fd);
+void					ft_error(int fd);
 
 /* ************************************************************************** */
 /*                          Fonctions de Listes Chaînées (Bonus)              */

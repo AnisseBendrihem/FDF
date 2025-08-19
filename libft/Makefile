@@ -6,7 +6,7 @@
 #    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/30 20:38:49 by abendrih          #+#    #+#              #
-#    Updated: 2025/08/06 00:50:34 by abendrih         ###   ########.fr        #
+#    Updated: 2025/08/19 02:03:16 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRC_LIBFT = \
 	ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_strdup.c \
 	ft_calloc.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
 	ft_strmapi.c ft_striteri.c ft_putnbr_fd.c ft_putchar_fd.c ft_putstr_fd.c \
-	ft_putendl_fd.c ft_strndup.c ft_atol.c ft_free.c
+	ft_putendl_fd.c ft_strndup.c ft_atol.c ft_free.c ft_error.c
 
 SRC_LIBFT   := $(addprefix ft_lib/, $(SRC_LIBFT))
 
