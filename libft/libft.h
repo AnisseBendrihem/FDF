@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:32:44 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/19 02:02:57 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/20 23:26:03 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void					ft_putchar_fd(char c, int fd);
 void					ft_putstr_fd(char *s, int fd);
 void					ft_putendl_fd(char *s, int fd);
 void					ft_putnbr_fd(int n, int fd);
-void					ft_error(int fd);
+void					ft_error(int fd, char *name_error);
 
 /* ************************************************************************** */
 /*                          Fonctions de Listes Chaînées (Bonus)              */
@@ -156,7 +156,6 @@ char					*get_next_line(int fd);
 int						lenof_newline(char *str);
 char					*extract_line(char **static_recip, char **read_recip);
 char					*next_and_free(char **static_recip, int bytes_read);
-int						init_var(int fd, char **final_line, char **read_recip,
-							ssize_t *bytes_read);
+int						init_var(int fd, char *s_recipe);
 
 #endif

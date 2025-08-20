@@ -6,7 +6,7 @@
 #    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/18 22:29:32 by abendrih          #+#    #+#              #
-#    Updated: 2025/08/19 02:07:22 by abendrih         ###   ########.fr        #
+#    Updated: 2025/08/20 23:18:05 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory 2>&1 | grep -v '^gcc'
-	@$(MAKE) -C $(MLX_DIR) --no-print-directory 2>&1 | grep -v '^gcc'
+	@echo "$(GREEN)Building MiniLibX...$(RESET)"
+	@$(MAKE) -C $(MLX_DIR) --no-print-directory 1>/dev/null
 	@echo "$(GREEN)Linking with LIBFT + MiniLibX...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_LIB) $(MLX_LDFLAGS)
 	@echo $(MATRIX_CODE)

@@ -6,13 +6,14 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 02:01:16 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/19 02:04:08 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:26:52 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_error(int fd)
+void	ft_error(int fd, char *name_error)
 {
-	write(fd, "error", 5);
+	write(fd, "Error : ", 8);
+	ft_printf("%s", name_error);
 }

@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 21:56:24 by abendrih          #+#    #+#             */
-/*   Updated: 2025/07/28 02:11:24 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/20 23:27:18 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,41 +77,38 @@ char	*next_and_free(char **s_recip, int bytes_read)
 		return (NULL);
 }
 
-int	init_var(int fd, char **final_line, char **r_recip, ssize_t *bytes_read)
+int	init_var(int fd, char *s_recip)
 {
-	*final_line = NULL;
-	*r_recip = NULL;
-	*bytes_read = 1;
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
+		return (free(s_recip), 0);
 	return (1);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*s_recip[1024] = {0};
+	static char	*s_recip;
 	char		*final_line;
 	char		*r_recip;
 	ssize_t		bytes_read;
 
-	if (init_var(fd, &final_line, &r_recip, &bytes_read) == 0)
+	free((final_line = NULL, r_recip = NULL, bytes_read = 1, NULL));
+	if (init_var(fd, s_recip) == 0)
 		return (NULL);
 	while (bytes_read != 0)
 	{
-		if (ft_strchr(s_recip[fd], '\n'))
+		if (ft_strchr(s_recip, '\n'))
 			break ;
 		r_recip = malloc(BUFFER_SIZE + 1);
 		if (!r_recip)
 			return (NULL);
 		bytes_read = read(fd, r_recip, BUFFER_SIZE);
 		if (bytes_read < 0)
-			return (free(r_recip), free(s_recip[fd]), s_recip[fd] = NULL, NULL);
+			return (free(r_recip), free(s_recip), s_recip = NULL, NULL);
 		r_recip[bytes_read] = '\0';
-		s_recip[fd] = extract_line(&s_recip[fd], &r_recip);
-		free(r_recip);
+		free((s_recip = extract_line(&s_recip, &r_recip), free(r_recip), NULL));
 	}
-	final_line = next_and_free(&s_recip[fd], bytes_read);
-	if (s_recip[fd] && *s_recip[fd] == 0)
-		return (free(s_recip[fd]), s_recip[fd] = NULL, final_line);
+	final_line = next_and_free(&s_recip, bytes_read);
+	if (s_recip && *s_recip == 0)
+		return (free(s_recip), s_recip = NULL, final_line);
 	return (final_line);
 }
