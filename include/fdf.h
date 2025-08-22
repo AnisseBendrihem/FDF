@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 22:29:35 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/22 03:31:46 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/22 20:10:47 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 typedef struct s_map
 {
-	int height; // LARGEUR
-	int width;  // LONGUEUR
-	int *Z;     // TABLEAU DE TOUTES LES HAUTEUR CONTENUE
+	int	height;
+	int	width;
+	int	*z;
 	int	min_z;
 	int	max_z;
 
@@ -27,10 +27,11 @@ typedef struct s_map
 
 // parsing
 int		valid_file(char *av);
-int		check_valid_map(char *av);
-int		mother_parsing(char *av);
+int		check_valid_map(char *av, t_map *key);
+int		mother_parsing(char *av, t_map *key);
 int		count_tab(char **tab);
 int		open_file(const char *av);
 int		problem_inside(char *line, t_map *key, int fd);
+int		fill_z_map(char *av, t_map *key);
 
 #endif

@@ -1,59 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_Z.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/19 01:13:19 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/22 20:12:00 by abendrih         ###   ########.fr       */
+/*   Created: 2025/08/22 17:21:18 by abendrih          #+#    #+#             */
+/*   Updated: 2025/08/22 20:11:32 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int	valid_file(char *av)
+static int	fill_line(char *line, t_map *key, int *i)
 {
-	int	len;
+	char	**slip_line;
+	int		recip;
+	int		j;
 
-	len = ft_strlen(av);
-	if (len < 4)
+	slip_line = ft_split(line, ' ');
+	recip = 0;
+	j = 0;
+	if (!slip_line)
 		return (0);
-	if (av[len - 4] == '.' && av[len - 3] == 'f' && av[len - 2] == 'd'
-		&& (av[len - 1] == 'f'))
-		return (1);
-	return (0);
+	while (j < count_tab(slip_line))
+	{
+		recip = ft_atoi(slip_line[j]);
+		key->z[*i] = recip;
+		(*i)++;
+		j++;
+	}
+	free(line);
+	ft_free(slip_line);
+	return (1);
 }
 
-int	check_valid_map(char *av, t_map *key)
+int	fill_z_map(char *av, t_map *key)
 {
 	int		fd;
 	char	*line;
+	int		i;
 
 	line = NULL;
+	i = 0;
 	fd = open_file(av);
 	if (fd < 0)
+		return (0);
+	key->z = malloc(sizeof(int) * ((key->height) * (key->width)));
+	if (!key->z)
 		return (0);
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!problem_inside(line, key, fd))
-			return (0);
+		if (!fill_line(line, key, &i))
+		{
+			free(key->z);
+			key->z = NULL;
+		}
 		line = get_next_line(fd);
 	}
 	close(fd);
-	if (!key->height)
-		return (ft_error(2, "empty file\n"), 0);
-	return (1);
-}
-
-int	mother_parsing(char *av, t_map *key)
-{
-	if (!valid_file(av))
-		return (ft_error(2, "file need to be .fdf type\n"), 0);
-	if (!check_valid_map(av, key))
-		return (0);
-	if (!fill_z_map(av, key))
-		return (0);
 	return (1);
 }
