@@ -6,7 +6,7 @@
 #    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/18 22:29:32 by abendrih          #+#    #+#              #
-#    Updated: 2025/08/22 20:12:24 by abendrih         ###   ########.fr        #
+#    Updated: 2025/08/25 07:18:43 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,9 @@ SRC         = \
 	$(PARSING_DIR)/parsing.c \
 	$(PARSING_DIR)/parsing_utils.c \
 	$(PARSING_DIR)/parsing_z.c \
-
-
+	$(SRC_DIR)/graphics_init.c \
+	$(SRC_DIR)/image.c \
+	$(SRC_DIR)/hooks.c\
 
 
 OBJ         = $(SRC:.c=.o)

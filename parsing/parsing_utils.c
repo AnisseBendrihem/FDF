@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 01:33:07 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/22 18:43:50 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/25 07:01:33 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ int	count_tab(char **tab)
 	while (tab[i])
 		i++;
 	return (i);
+}
+
+int	xy_to_index(t_map key, int x, int y)
+{
+	int	index;
+
+	index = y * key.width + x;
+	return (index);
+}
+
+void	index_to_xy(t_map key, int index, int *x, int *y)
+{
+	*x = index / key.width;
+	*y = index % key.width;
 }
 
 int	open_file(const char *av)
