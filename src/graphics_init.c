@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 01:30:09 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/25 11:06:01 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/25 18:34:49 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,4 @@ int	init_app(t_app *app, int win_w, int win_h, const char *title)
 	app->img.w = win_w;
 	app->img.h = win_h;
 	return (1);
-}
-
-int	close_app(t_app *app)
-{
-	t_map	*m;
-
-	m = app->map;
-	if (app->img.img)
-		mlx_destroy_image(app->mlx, app->img.img);
-	if (app->win)
-		mlx_destroy_window(app->mlx, app->win);
-	if (app->mlx)
-	{
-		mlx_destroy_display(app->mlx);
-		free(app->mlx);
-	}
-	if (m && m->z)
-		free(m->z);
-	exit(0);
-}
-
-int	on_key(int keycode, void *param)
-{
-	if (keycode == 65307)
-		return (close_app(param));
-	return (0);
 }

@@ -1,39 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/25 01:31:27 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/25 18:36:13 by abendrih         ###   ########.fr       */
+/*   Created: 2025/08/25 19:42:30 by abendrih          #+#    #+#             */
+/*   Updated: 2025/08/25 19:42:48 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	close_app(t_app *app)
-{
-	t_map	*m;
-
-	m = app->map;
-	if (app->img.img)
-		mlx_destroy_image(app->mlx, app->img.img);
-	if (app->win)
-		mlx_destroy_window(app->mlx, app->win);
-	if (app->mlx)
-	{
-		mlx_destroy_display(app->mlx);
-		free(app->mlx);
-	}
-	if (m && m->z)
-		free(m->z);
-	exit(0);
-}
-
-int	on_key(int keycode, void *param)
-{
-	if (keycode == 65307)
-		return (close_app(param));
-	return (0);
-}

@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 17:21:18 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/25 06:22:42 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/25 18:52:30 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	fill_z_map(char *av, t_map *key)
 		{
 			free(key->z);
 			key->z = NULL;
-			return (free(line), close(fd), 0);
+			return (close(fd), 0);
 		}
 		line = get_next_line(fd);
 	}

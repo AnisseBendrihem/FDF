@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 01:13:19 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/24 23:43:03 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/25 18:38:20 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	valid_file(char *av)
 int	check_valid_map(char *av, t_map *key)
 {
 	char	*line;
+	int		fd;
 
-	int(fd) = open_file(av);
+	fd = open_file(av);
 	line = NULL;
 	if (fd < 0)
 		return (0);

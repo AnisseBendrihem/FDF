@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 01:33:07 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/25 07:01:33 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/25 18:37:04 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	xy_to_index(t_map key, int x, int y)
 
 void	index_to_xy(t_map key, int index, int *x, int *y)
 {
-	*x = index / key.width;
-	*y = index % key.width;
+	*x = index % key.width;
+	*y = index / key.width;
 }
 
 int	open_file(const char *av)
