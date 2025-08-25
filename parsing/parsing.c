@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 01:13:19 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/22 20:12:00 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/24 23:43:03 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ int	valid_file(char *av)
 
 int	check_valid_map(char *av, t_map *key)
 {
-	int		fd;
 	char	*line;
 
+	int(fd) = open_file(av);
 	line = NULL;
-	fd = open_file(av);
 	if (fd < 0)
 		return (0);
 	line = get_next_line(fd);
@@ -55,5 +54,6 @@ int	mother_parsing(char *av, t_map *key)
 		return (0);
 	if (!fill_z_map(av, key))
 		return (0);
+	fill_min_z_and_max_z(key);
 	return (1);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_Z.c                                        :+:      :+:    :+:   */
+/*   parsing_z.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 17:21:18 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/22 20:11:32 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/25 04:24:12 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static int	fill_line(char *line, t_map *key, int *i)
 	int		recip;
 	int		j;
 
-	slip_line = ft_split(line, ' ');
-	recip = 0;
 	j = 0;
+	recip = 0;
+	slip_line = ft_split(line, ' ');
 	if (!slip_line)
 		return (0);
-	while (j < count_tab(slip_line))
+	while (j < key->width)
 	{
 		recip = ft_atoi(slip_line[j]);
 		key->z[*i] = recip;
@@ -56,9 +56,27 @@ int	fill_z_map(char *av, t_map *key)
 		{
 			free(key->z);
 			key->z = NULL;
+			return (free(line), close(fd), 0)
 		}
 		line = get_next_line(fd);
 	}
 	close(fd);
 	return (1);
+}
+
+void	fill_min_z_and_max_z(t_map *key)
+{
+	int	i;
+
+	i = 0;
+	key->max_z = INT_MIN;
+	key->min_z = INT_MAX;
+	while (i < key->height * key->width)
+	{
+		if (key->max_z < key->z[i])
+			key->max_z = key->z[i];
+		if (key->min_z > key->z[i])
+			key->min_z = key->z[i];
+		i++;
+	}
 }
