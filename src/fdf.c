@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 01:12:33 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/26 17:38:39 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/28 03:15:30 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_point_iso	projection_iso(int x, int y, int z, t_view *v)
 	return (result);
 }
 
-void	draw_point_cloud(t_app *app, t_view *v, t_map *map, int color)
+int	draw_point_cloud(t_app *app, t_view *v, t_map *map, int color)
 {
 	t_point_iso	p;
 	int			idx;
@@ -47,4 +47,5 @@ void	draw_point_cloud(t_app *app, t_view *v, t_map *map, int color)
 		}
 		y++;
 	}
+	return (0);
 }

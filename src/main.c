@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 01:19:19 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/28 01:35:10 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/28 03:16:01 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int ac, char **av)
 	/* --- Hooks --- */
 	mlx_hook(app.win, 17, 0, close_app, &app);
 	mlx_hook(app.win, 2, 1, on_key, &app);
+	mlx_loop_hook(app.mlx, draw_point_cloud, &app);
 	/* --- Boucle MLX --- */
 	mlx_loop(app.mlx);
 	return (0);

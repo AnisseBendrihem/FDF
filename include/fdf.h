@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 22:29:35 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/28 02:06:26 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/28 03:15:41 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,20 +91,20 @@ int			close_app(t_app *app);
 // PROJECTION & VIEW
 // ============================================================================
 t_point_iso	projection_iso(int x, int y, int z, t_view *v);
-void		draw_point_cloud(t_app *app, t_view *v, t_map *map, int color);
+int			draw_point_cloud(t_app *app, t_view *v, t_map *map, int color);
 void		init_view(t_view *v, t_app *app, t_map *map);
 int			on_key(int keycode, void *param);
 
 // ============================================================================
 // PARSING
 // ============================================================================
-int			valid_file(const char *av);
-int			check_valid_map(const char *av, t_map *key);
-int			mother_parsing(const char *av, t_map *key);
+int			valid_file(char *av);
+int			check_valid_map(char *av, t_map *key);
+int			mother_parsing(char *av, t_map *key);
 int			count_tab(char **tab);
-int			open_file(const char *av);
+int			open_file(char *av);
 int			problem_inside(char *line, t_map *key, int fd);
-int			fill_z_map(const char *av, t_map *key);
+int			fill_z_map(char *av, t_map *key);
 void		fill_min_z_and_max_z(t_map *key);
 
 // ============================================================================
