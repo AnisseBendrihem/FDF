@@ -6,13 +6,13 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 01:12:33 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/25 23:27:50 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/26 17:38:39 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-t_point_iso	project_iso(int x, int y, int z, t_view *v)
+t_point_iso	projection_iso(int x, int y, int z, t_view *v)
 {
 	t_point_iso	result;
 	double		iso_x;
@@ -25,7 +25,7 @@ t_point_iso	project_iso(int x, int y, int z, t_view *v)
 	return (result);
 }
 
-void	draw_point_cloud(t_app *app, t_view *v, int color)
+void	draw_point_cloud(t_app *app, t_view *v, t_map *map, int color)
 {
 	t_point_iso	p;
 	int			idx;
@@ -34,14 +34,14 @@ void	draw_point_cloud(t_app *app, t_view *v, int color)
 	int			x;
 
 	y = 0;
-	while (y < app->map->height)
+	while (y < map->height)
 	{
 		x = 0;
-		while (x < app->map->width)
+		while (x < map->width)
 		{
-			idx = xy_to_index(*(app->map), x, y);
+			idx = xy_to_index(*map, x, y);
 			z = app->map->z[idx];
-			p = project_iso(x, y, z, v);
+			p = projection_iso(x, y, z, v);
 			put_pixel(&app->img, p.x, p.y, color);
 			x++;
 		}
