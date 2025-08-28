@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:42:30 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/28 04:36:32 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/29 00:57:36 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,8 @@ int	render(void *param)
 	t_app	*app;
 
 	app = (t_app *)param;
-	// 1) clear le buffer (attention : utilise le même format que put_pixel)
 	clear_image(&app->img, 0x000000);
-	// fond noir (24bpp ou 32bpp selon ton put_pixel)
-	// 2) dessiner (note bien les & ici)
 	draw_point_cloud(app, &app->view, app->map, 0xFF00FF);
-	// 3) pousser l'image
 	mlx_put_image_to_window(app->mlx, app->win, app->img.img, 0, 0);
-	// 4) signature MLX: retourner 0
 	return (0);
 }
