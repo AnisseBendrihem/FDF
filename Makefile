@@ -6,7 +6,7 @@
 #    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/18 22:29:32 by abendrih          #+#    #+#              #
-#    Updated: 2025/08/25 07:18:43 by abendrih         ###   ########.fr        #
+#    Updated: 2025/08/28 04:15:46 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRC         = \
 	$(SRC_DIR)/graphics_init.c \
 	$(SRC_DIR)/image.c \
 	$(SRC_DIR)/hooks.c\
+	$(SRC_DIR)/render.c\
+
 
 
 OBJ         = $(SRC:.c=.o)

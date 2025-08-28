@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 22:29:35 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/28 03:15:41 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/28 05:20:56 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@
 # define UP_BUTTON 65362
 # define RIGHT_BUTTON 65363
 # define DOWN_BUTTON 65364
-# define PLUS_BUTTON 61  // '=' / '+'
-# define MINUS_BUTTON 45 // '-'
+# define PLUS_BUTTON 65451  // '=' / '+'
+# define MINUS_BUTTON 65453 // '-'
+# define RESET_BUTTON 114
 
 // ============================================================================
 // MAP STRUCTURE
@@ -92,6 +93,7 @@ int			close_app(t_app *app);
 // ============================================================================
 t_point_iso	projection_iso(int x, int y, int z, t_view *v);
 int			draw_point_cloud(t_app *app, t_view *v, t_map *map, int color);
+int			render(void *param);
 void		init_view(t_view *v, t_app *app, t_map *map);
 int			on_key(int keycode, void *param);
 

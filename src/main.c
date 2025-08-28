@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 01:19:19 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/28 03:16:01 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/08/28 04:39:34 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ int	main(int ac, char **av)
 {
 	t_map	key;
 	t_app	app;
-	t_view	v;
 
-	/* --- Init map --- */
+	// Init map
 	key.height = 0;
 	key.width = -1;
 	key.z = NULL;
@@ -30,21 +29,20 @@ int	main(int ac, char **av)
 	if (!mother_parsing(av[1], &key))
 		return (0);
 	ft_printf("Initialisation OK\n");
-	/* --- Init MLX --- */
+	// Init MLX
 	if (!init_app(&app, 1280, 720, "FDF"))
 		return (free(key.z), 1);
-	/* --- Init vue --- */
-	init_view(&v, &app, &key);
-	/* --- Dessin --- */
-	clear_image(&app.img, 0x00000000);          /* fond noir */
-	draw_point_cloud(&app, &v, &key, 0xFFFFFF); /* points en blanc */
-	/* --- Affichage --- */
+	// Init vue
+	init_view(&app.view, &app, &key);
+	// Dessin
+	draw_point_cloud(&app, &app.view, &key, 0xFF00FF);
+	// Affichage
 	mlx_put_image_to_window(app.mlx, app.win, app.img.img, 0, 0);
-	/* --- Hooks --- */
+	// Hooks
 	mlx_hook(app.win, 17, 0, close_app, &app);
 	mlx_hook(app.win, 2, 1, on_key, &app);
-	mlx_loop_hook(app.mlx, draw_point_cloud, &app);
-	/* --- Boucle MLX --- */
+	mlx_loop_hook(app.mlx, render, &app);
+	// Boucle MLX
 	mlx_loop(app.mlx);
 	return (0);
 }
