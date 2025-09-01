@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 01:30:09 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/26 17:14:31 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/09/01 23:31:29 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,14 @@ void	init_view(t_view *v, t_app *app, t_map *map)
 	double	base;
 	int		min_dim;
 
-	/* --- Taille globale de la map --- */
 	base = (double)(map->width + map->height);
 	if (base < 1.0)
 		base = 1.0;
-	/* --- Dimension limitante de la fenêtre --- */
 	min_dim = app->img.w;
 	if (app->img.h < min_dim)
 		min_dim = app->img.h;
-	/* --- Zoom de base --- */
 	v->scale = ((double)min_dim / base) * 0.8;
-	/* --- Poids du relief (à ajuster si nécessaire) --- */
 	v->z_scale = 0.2;
-	/* --- Décalage pour centrer --- */
 	v->offset_x = app->img.w / 2;
 	v->offset_y = app->img.h / 2;
 }

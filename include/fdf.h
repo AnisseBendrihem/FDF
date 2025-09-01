@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 22:29:35 by abendrih          #+#    #+#             */
-/*   Updated: 2025/08/29 00:58:46 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/09/01 23:30:20 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,33 @@ typedef struct s_app
 	t_view	view;
 }			t_app;
 
-typedef struct s_bresenham
+typedef struct s_line
 {
-	int cur_x;  // position en X courante
-	int cur_y;  // position en Y courante
-	int end_x;  // X d'arrivée
-	int end_y;  // Y d'arrivée
-	int dist_x; // |end_x - cur_x|
-	int dist_y; // |end_y - cur_y|
-	int step_x; // +1 ou -1 selon la direction horizontale
-	int step_y; // +1 ou -1 selon la direction verticale
-	int error;  // erreur de tracé (dx - dy)
-}			t_bresenham;
+	int		start_x;
+	int		start_y;
+	int		end_x;
+	int		end_y;
+	int		color;
+
+	int		current_x;
+	int		current_y;
+	int		delta_x;
+	int		delta_y;
+	int		step_x;
+	int		step_y;
+	int		error;
+	int		doubled_error;
+}			t_line;
+
+typedef struct s_wireframe
+{
+	t_app	*app;
+	t_view	*view;
+	t_map	*map;
+	int		color;
+	int		grid_x;
+	int		grid_y;
+}			t_wireframe;
 
 // ============================================================================
 // GRAPHICS FUNCTIONS
@@ -115,8 +130,13 @@ int			draw_point_cloud(t_app *app, t_view *v, t_map *map, int color);
 int			render(void *param);
 void		init_view(t_view *v, t_app *app, t_map *map);
 int			on_key(int keycode, void *param);
-void		draw_line(t_img *image, int start_x, int start_y, int end_x,
-				int end_y, int color);
+void		wf_init(t_wireframe *wf, t_app *app, t_view *view, t_map *map,
+				int color);
+int			wf_step(t_wireframe *wf);
+
+void		line_init(t_line *line);
+int			line_step(t_img *image, t_line *line);
+
 // ============================================================================
 // PARSING
 // ============================================================================
