@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 01:31:27 by abendrih          #+#    #+#             */
-/*   Updated: 2025/09/01 23:14:59 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/09/02 00:11:18 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	on_key(int keycode, void *param)
 	t_app	*app;
 
 	app = (t_app *)param;
-	ft_printf("%d\n", keycode);
 	if (keycode == ESC_BUTTON)
 		return (close_app(app));
 	if (keycode == LEFT_BUTTON)

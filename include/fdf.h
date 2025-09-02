@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 22:29:35 by abendrih          #+#    #+#             */
-/*   Updated: 2025/09/01 23:30:20 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/09/02 02:01:36 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@
 
 typedef struct s_map
 {
-	int height; // number of rows
-	int width;  // number of cols
-	int min_z;  // minimum altitude
-	int max_z;  // maximum altitude
-	int *z;     // 1D array of z values (size = width * height)
+	int		height;
+	int		width;
+	int		min_z;
+	int		max_z;
+	int		*z;
 }			t_map;
 
 // ============================================================================
@@ -52,16 +52,16 @@ typedef struct s_map
 
 typedef struct s_point_iso
 {
-	int x; // projected X (screen)
-	int y; // projected Y (screen)
+	int		x;
+	int		y;
 }			t_point_iso;
 
 typedef struct s_view
 {
-	double scale;   // zoom XY
-	double z_scale; // vertical relief factor
-	int offset_x;   // screen offset X
-	int offset_y;   // screen offset Y
+	double	scale;
+	double	z_scale;
+	int		offset_x;
+	int		offset_y;
 }			t_view;
 
 typedef struct s_img
@@ -112,6 +112,11 @@ typedef struct s_wireframe
 	int		grid_y;
 }			t_wireframe;
 
+typedef struct s_xy
+{
+	int		x;
+	int		y;
+}			t_xy;
 // ============================================================================
 // GRAPHICS FUNCTIONS
 // ============================================================================
@@ -130,8 +135,6 @@ int			draw_point_cloud(t_app *app, t_view *v, t_map *map, int color);
 int			render(void *param);
 void		init_view(t_view *v, t_app *app, t_map *map);
 int			on_key(int keycode, void *param);
-void		wf_init(t_wireframe *wf, t_app *app, t_view *view, t_map *map,
-				int color);
 int			wf_step(t_wireframe *wf);
 
 void		line_init(t_line *line);
@@ -157,4 +160,4 @@ void		fill_min_z_and_max_z(t_map *key);
 void		index_to_xy(t_map key, int index, int *x, int *y);
 int			xy_to_index(t_map key, int x, int y);
 
-#endif // FDF_H
+#endif

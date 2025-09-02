@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:42:30 by abendrih          #+#    #+#             */
-/*   Updated: 2025/09/01 23:30:49 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/09/02 01:07:19 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ int	render(void *param)
 
 	app = (t_app *)param;
 	clear_image(&app->img, 0x00000000);
-	wf_init(&wf, app, &app->view, app->map, 0xFF00FF);
+	wf.app = app;
+	wf.view = &app->view;
+	wf.map = app->map;
+	wf.color = 0xFF00FF;
+	wf.grid_x = 0;
+	wf.grid_y = 0;
 	done = 0;
 	while (!done)
 		done = wf_step(&wf);

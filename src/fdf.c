@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 01:12:33 by abendrih          #+#    #+#             */
-/*   Updated: 2025/09/01 23:38:17 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/09/02 02:14:49 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,16 @@ int	line_step(t_img *image, t_line *line)
 	return (0);
 }
 
-static void	wf_link(t_wireframe *wf, int x1, int y1, int x2, int y2)
+static void	wf_link(t_wireframe *wf, t_xy p1, t_xy p2)
 {
 	t_point_iso	a;
 	t_point_iso	b;
 	t_line		ln;
-	int			idx;
 
-	idx = xy_to_index(*wf->map, x1, y1);
-	a = projection_iso(x1, y1, wf->map->z[idx], wf->view);
-	idx = xy_to_index(*wf->map, x2, y2);
-	b = projection_iso(x2, y2, wf->map->z[idx], wf->view);
+	a = projection_iso(p1.x, p1.y, wf->map->z[xy_to_index(*wf->map, p1.x,
+				p1.y)], wf->view);
+	b = projection_iso(p2.x, p2.y, wf->map->z[xy_to_index(*wf->map, p2.x,
+				p2.y)], wf->view);
 	ln.start_x = a.x;
 	ln.start_y = a.y;
 	ln.end_x = b.x;
@@ -86,35 +85,32 @@ static void	wf_link(t_wireframe *wf, int x1, int y1, int x2, int y2)
 	ln.color = wf->color;
 	line_init(&ln);
 	while (!line_step(&wf->app->img, &ln))
-		;
-}
-
-void	wf_init(t_wireframe *wf, t_app *app, t_view *view, t_map *map,
-		int color)
-{
-	wf->app = app;
-	wf->view = view;
-	wf->map = map;
-	wf->color = color;
-	wf->grid_x = 0;
-	wf->grid_y = 0;
+		line_step(&wf->app->img, &ln);
 }
 
 int	wf_step(t_wireframe *wf)
 {
+	t_xy	p1;
+	t_xy	p2;
+
 	if (wf->grid_y >= wf->map->height)
 		return (1);
+	p1.x = wf->grid_x;
+	p1.y = wf->grid_y;
 	if (wf->grid_x + 1 < wf->map->width)
-		wf_link(wf, wf->grid_x, wf->grid_y, wf->grid_x + 1, wf->grid_y);
+	{
+		p2 = (t_xy){wf->grid_x + 1, wf->grid_y};
+		wf_link(wf, p1, p2);
+	}
 	if (wf->grid_y + 1 < wf->map->height)
-		wf_link(wf, wf->grid_x, wf->grid_y, wf->grid_x, wf->grid_y + 1);
-	wf->grid_x = wf->grid_x + 1;
-	if (wf->grid_x >= wf->map->width)
+	{
+		p2 = (t_xy){wf->grid_x, wf->grid_y + 1};
+		wf_link(wf, p1, p2);
+	}
+	if (++wf->grid_x >= wf->map->width)
 	{
 		wf->grid_x = 0;
-		wf->grid_y = wf->grid_y + 1;
+		wf->grid_y++;
 	}
-	if (wf->grid_y >= wf->map->height)
-		return (1);
-	return (0);
+	return (wf->grid_y >= wf->map->height);
 }
